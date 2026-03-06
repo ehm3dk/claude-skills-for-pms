@@ -30,23 +30,35 @@ git clone https://github.com/ehm3dk/claude-skills-for-pms.git ~/.claude/skills
 | `discovery` | Run structured market research and competitor analysis. Covers TAM/SAM/SOM, competitor landscape, feature matrix, SWOT, gaps, and positioning. Uses live web search. |
 | `challenge-me` | Stress-test an idea, plan, or decision. Surfaces blind spots, challenges weak assumptions, and presents the strongest counter-argument. |
 
-### Execution
+### Execution — Communication
 
 | Skill | What it does |
 |-------|-------------|
 | `meeting-notes` | Turn raw meeting notes or transcripts into structured documents with decisions, action items, key points, and open questions. Outputs as .docx or .md. |
 | `meeting-agenda` | Generate structured meeting agendas with time blocks, objectives, and expected outcomes before the meeting starts. |
-| `meeting-to-requirements` | Transform meeting notes and stakeholder inputs directly into a structured PRD. |
-| `user-story-writer` | Generate well-structured user stories with acceptance criteria and edge cases from feature descriptions, PRDs, or raw notes. |
-| `feature-decomposition-tool` | Break a feature down into shippable chunks with dependencies mapped. |
 | `stakeholder-update` | Generate professional stakeholder, leadership, or executive updates. Handles all audiences with RAG status and SCARF framework. Outputs as .docx or .md. |
 | `release-note` | Generate release notes from Jira tickets, Confluence pages, or a feature description. Supports multi-channel output (changelog, email, in-app, social) and T1/T2/T3 tiers. |
-| `release-readiness` | Assess whether a feature is ready to release against functional, data, security, NFR, and ops criteria. |
-| `sprint-planning-assistant` | Create a sprint plan with goals, capacity, and committed work. |
 | `one-pager-creator` | Create a concise one-page brief for quick stakeholder alignment or feature proposals. |
-| `experiment-designer` | Design product experiments beyond A/B tests — pricing, features, operations, and pilot programs. |
-| `user-interview-analyzer` | Transform raw interview transcripts into structured snapshots with extracted opportunities and key quotes. |
 | `stakeholder-simulator` | Get simulated feedback from CTO, UX, Sales, Executive, and User Advocate perspectives before a review. |
+| `user-interview-analyzer` | Transform raw interview transcripts into structured snapshots with extracted opportunities and key quotes. |
+
+### Execution — Specs
+
+| Skill | What it does |
+|-------|-------------|
+| `user-story-writer` | Generate well-structured user stories with acceptance criteria and edge cases from feature descriptions, PRDs, or raw notes. |
+| `feature-decomposition-tool` | Break a feature down into shippable chunks with dependencies mapped. |
+| `meeting-to-requirements` | Transform meeting notes and stakeholder inputs directly into a structured PRD. |
+| `technical-spec-writer` | Write technical specifications with architecture, data models, and API designs. |
+| `api-documentation-writer` | Write clear API documentation with authentication, endpoints, and examples. |
+
+### Execution — Planning
+
+| Skill | What it does |
+|-------|-------------|
+| `sprint-planning-assistant` | Create a sprint plan with goals, capacity, and committed work. |
+| `experiment-designer` | Design product experiments beyond A/B tests — pricing, features, operations, and pilot programs. |
+| `release-readiness` | Assess whether a feature is ready to release against functional, data, security, NFR, and ops criteria. |
 
 ---
 
@@ -66,22 +78,29 @@ Just describe what you need in natural language:
 
 "Write a stakeholder update for leadership"
 → uses stakeholder-update
+
+"Simulate stakeholder feedback on this proposal"
+→ uses stakeholder-simulator
+```
+
+---
+
+## Structure
+
+```
+skills/
+  strategic/
+    define-product/
+    discovery/
+    challenge-me/
+  execution/
+    communication/   — meeting notes, agendas, updates, release notes
+    specs/           — user stories, PRDs, technical specs, API docs
+    planning/        — sprint planning, experiments, release readiness
 ```
 
 ---
 
 ## Contributing
 
-Skills are plain Markdown files. Each skill lives in its own directory:
-
-```
-skills/
-  strategic/
-    define-product/SKILL.md
-    discovery/SKILL.md
-  execution/
-    meeting-notes/SKILL.md
-    ...
-```
-
-To add a skill: create a new directory under `strategic/` or `execution/`, add a `SKILL.md`, and open a PR.
+Skills are plain Markdown files. Each skill lives in `skill-name/SKILL.md` within the appropriate category folder. To add a skill: create the directory, add a `SKILL.md` with a frontmatter `name` and `description`, and open a PR.
