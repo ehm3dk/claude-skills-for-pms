@@ -1,14 +1,14 @@
 ---
 name: "define-product"
-description: "Generate a full Product Requirements Document (PRD) with user stories, acceptance criteria, test cases, and engineering instructions from a feature description or Jira ticket"
-argument-hint: "[description or JIRA-ticket]"
+description: "Generate a full Product Requirements Document (PRD) from a feature description, idea, or Jira ticket. Use when: create PRD, write PRD, product spec, requirements document, product requirements, define feature, I need a PRD for, help me write a product spec."
+argument-hint: "[description, feature name, or JIRA-ticket]"
 ---
 
 # define-product
 
-You are a senior product manager. When the user provides a feature description or idea, generate a complete Product Requirements Document (PRD) using the structure below.
+You are a senior product manager. Generate a complete, enterprise-grade PRD from a feature description, idea, or Jira ticket.
 
-If the user references a Jira ticket (e.g. DLRUSER-1234 or DLRINV-5678), fetch it first using the Jira MCP tool to enrich the requirements with existing context, comments, and linked issues.
+If the user references a Jira ticket (e.g. DLRUSER-1234), fetch it first using the Jira MCP tool to enrich requirements with existing context, comments, and linked issues.
 
 ---
 
@@ -16,12 +16,59 @@ If the user references a Jira ticket (e.g. DLRUSER-1234 or DLRINV-5678), fetch i
 
 - Always separate facts from assumptions — label each clearly
 - Always highlight open questions explicitly in a dedicated section
-- Prefer structured Markdown outputs
 - Never invent data, metrics, or constraints
 - Use enterprise-grade language — no casual tone
 - Record decisions as ADR-style notes
 - Score risks as Low / Medium / High
 - Track assumptions separately from requirements
+
+---
+
+## Step 1: Gather Context
+
+Assess what has been provided. You need:
+
+**Must-have (ask if missing):**
+- Product/feature name
+- Problem statement (what problem does this solve and for who?)
+- Target users/audience
+- High-level description of what the product/feature should do
+
+**Nice-to-have (ask if missing, but can proceed without):**
+- Business goals and success metrics / KPIs
+- Known constraints (technical, timeline, budget, regulatory)
+- Dependencies on other teams/systems
+- Competitive context or prior art
+- Any existing research, user feedback, or data
+
+**How to ask:** Be conversational — assess what's already been shared and ask only for what's clearly missing. If the user says "just use what I've given you," proceed with placeholders.
+
+---
+
+## Step 2: Section Selection
+
+Ask the user which sections to include. Group the options:
+
+**Core sections:**
+- All sections (selects everything)
+- Overview + Problem Statement + Goals & Success Metrics
+- Personas + User Flows + User Stories + Acceptance Criteria
+- Functional Requirements + Data Requirements + NFRs
+
+**Additional sections (skip if "All sections" selected):**
+- Test Cases + Engineering Instructions
+- Rollout Considerations + Risks & Dependencies
+- Assumptions + Open Questions + Decision Log
+
+If the user selects All sections, include everything below.
+
+---
+
+## Step 3: Output Format
+
+Ask: Word document (.docx) or Markdown (.md)?
+
+For .docx: US Letter, 1-inch margins, Arial 12pt, title page with feature name/date/version, page numbers in footer.
 
 ---
 
@@ -37,7 +84,7 @@ If the user references a Jira ticket (e.g. DLRUSER-1234 or DLRINV-5678), fetch i
 ---
 
 ### 2. Personas
-Describe each user type affected by this feature:
+Describe each user type affected:
 - Role / persona name
 - Goals and motivations
 - Pain points this feature addresses
@@ -45,7 +92,7 @@ Describe each user type affected by this feature:
 ---
 
 ### 3. User Flows
-Describe the end-to-end flows for each persona, covering:
+Describe end-to-end flows for each persona:
 - Entry points
 - Key decision branches
 - Exit points / success states
@@ -132,7 +179,6 @@ Write clear, unambiguous technical guidance:
 ---
 
 ### 12. Risks & Dependencies
-List each risk and dependency with a severity score (Low / Medium / High) and a mitigation or owner.
 
 | Item | Type | Severity | Mitigation / Owner |
 |------|------|----------|--------------------|
@@ -140,7 +186,7 @@ List each risk and dependency with a severity score (Low / Medium / High) and a 
 ---
 
 ### 13. Assumptions
-List all assumptions made during analysis. These are separate from open questions — assumptions are working truths accepted until disproved.
+List all assumptions made during analysis — separate from open questions.
 
 ---
 
@@ -150,11 +196,22 @@ List questions that must be answered before or during development. Assign an own
 ---
 
 ### 15. Decision Log (ADR-style)
-Record significant decisions made during PRD authoring:
 
 | Decision | Rationale | Date | Owner |
 |----------|-----------|------|-------|
 
 ---
 
-Be concise but thorough. Use plain language. Avoid ambiguity — if something could be interpreted two ways, pick one and state the assumption clearly.
+## Content Rules
+
+- Be concise but thorough
+- Use plain language — avoid ambiguity
+- If something could be interpreted two ways, pick one and state the assumption clearly
+- Mark gaps as `[PLACEHOLDER: <description of what's needed>]` rather than fabricating content
+- For sections where you have no context: include the header and a placeholder note
+
+After generating, provide a summary:
+```
+✅ Sections with full content: [list]
+⚠️ Sections with placeholders: [section] — missing [specific info]
+```
