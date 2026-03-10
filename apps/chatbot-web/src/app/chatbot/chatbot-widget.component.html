@@ -1,0 +1,69 @@
+<button
+  id="chatbot-launcher"
+  class="launcher"
+  type="button"
+  (click)="open()"
+  [attr.aria-expanded]="isOpen()"
+  aria-controls="chatbot-panel"
+>
+  Chat
+</button>
+
+@if (isOpen()) {
+  <section
+    id="chatbot-panel"
+    class="panel"
+    role="dialog"
+    aria-label="Chatbot"
+    (keydown)="onKeydownPanel($event)"
+  >
+    <header class="panelHeader">
+      <div class="panelTitle">Assistant</div>
+      <button class="iconButton" type="button" (click)="close()" aria-label="Close chat">
+        ×
+      </button>
+    </header>
+
+    <div id="chatbot-message-list" class="messages" role="log" aria-live="polite">
+      @for (m of messages(); track m.id) {
+        <div class="messageRow" [class.user]="m.role === 'user'" [class.assistant]="m.role === 'assistant'">
+          <div class="bubble">
+            {{ m.content }}
+          </div>
+        </div>
+      }
+
+      @if (isSending()) {
+        <div class="messageRow assistant">
+          <div class="bubble typing" aria-label="Assistant is typing">Typing…</div>
+        </div>
+      }
+    </div>
+
+    @if (quickReplies().length > 0) {
+      <div class="quickReplies" aria-label="Suggested replies">
+        @for (r of quickReplies(); track r) {
+          <button type="button" class="quickReply" (click)="chooseQuickReply(r)">
+            {{ r }}
+          </button>
+        }
+      </div>
+    }
+
+    <form class="composer" (submit)="$event.preventDefault(); send();">
+      <input
+        id="chatbot-composer"
+        class="composerInput"
+        name="message"
+        [ngModel]="composerText()"
+        (ngModelChange)="composerText.set($event)"
+        placeholder="Type a message…"
+        autocomplete="off"
+      />
+      <button class="composerSend" type="submit" [disabled]="!canSend()">
+        Send
+      </button>
+    </form>
+  </section>
+}
+
