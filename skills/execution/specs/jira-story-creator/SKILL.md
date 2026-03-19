@@ -137,7 +137,68 @@ What would you like to do?
 
 ## Phase 4: Jira Creation
 
-...
+### Duplicate Check
+
+Before creating any stories, if a target epic is provided, run a duplicate check:
+
+```
+searchJiraIssuesUsingJql: project = [PROJECT] AND "Epic Link" = [EPIC_KEY] ORDER BY created DESC
+```
+
+If stories with identical or very similar titles exist, list them and ask the user whether to proceed.
+
+### Epic Handling
+
+**If an epic was provided:** link stories to it using the method below.
+
+**If no epic exists and the user wants one:**
+- Create the epic first: `createJiraIssue` with `issuetype: Epic`, `summary: [Epic title]`, `project: [PROJECT]`
+- Note the returned epic key, then link all stories to it
+
+**If no epic exists and the user wants stories unlinked:** proceed without a parent.
+
+### Creating Each Story
+
+For each approved story, call `createJiraIssue` with these fields:
+
+```
+summary: [story title]
+issuetype: { name: "Story" }
+project: { key: "[PROJECT]" }
+description: [ADF-formatted content — see Jira Field Template section]
+parent: { key: "[EPIC_KEY]" }   ← attempt this first
+```
+
+**Epic link fallback:** If `parent` fails (Classic project), retry with:
+```
+customfield_10014: "[EPIC_KEY]"
+```
+Note which method succeeded for the rest of the batch.
+
+After each story is created, output:
+```
+✓ [ISSUE_KEY] — [Story title]
+```
+
+If creation fails, output:
+```
+✗ [Story title] — [error message] (skipped, will retry at end)
+```
+Continue with remaining stories.
+
+### End Summary
+
+After all stories are attempted:
+
+```
+Created X of Y stories:
+
+✓ DLRUSER-456 — Filter inventory by make/model
+✓ DLRUSER-457 — Save filter preferences
+✗ DU-003 — Export filtered list (failed: [reason]) ← retry? y/n
+```
+
+Offer retry for any failed stories.
 
 ## Jira Field Template
 
