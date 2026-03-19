@@ -202,8 +202,35 @@ Offer retry for any failed stories.
 
 ## Jira Field Template
 
-...
+All story content is packed into the `description` field using Atlassian Document Format (ADF). Structure each story description as a series of H2 headings with content beneath each.
+
+| Section | Jira Field | Required? |
+|---|---|---|
+| Story title | `summary` | Always |
+| Issue type | `issuetype: Story` | Always |
+| Project | `project.key` | Always |
+| Epic link | `parent.key` or `customfield_10014` | If epic exists |
+| Description | H2 in `description` (ADF) | Always |
+| Acceptance Criteria | H2 in `description` (ADF) | Always |
+| Test Cases | H2 in `description` (ADF) | Always |
+| Engineering Approach | H2 in `description` (ADF) | If context available |
+| Functional Requirements | H2 in `description` (ADF) | Always |
+| Non-Functional Requirements | H2 in `description` (ADF) | If relevant |
+| Data Requirements | H2 in `description` (ADF) | If relevant |
+| Instrumentation | H2 in `description` (ADF) | User-facing interactions only |
+| Engineering Instructions | H2 in `description` (ADF) | Always |
+| Rollout Considerations | H2 in `description` (ADF) | If relevant |
+
+Omit sections marked "If relevant" when they genuinely don't apply. Mark sections marked "If context available" as `[Needs input from engineering]` rather than omitting them entirely.
 
 ## Error Handling
 
-...
+| Scenario | Response |
+|---|---|
+| Missing persona or core user actions | Ask before proceeding. If user says "just go", mark as `[Assumption]` |
+| Epic key not found (`getJiraIssue` returns 404) | Surface error clearly, offer: create new epic / proceed unlinked / provide different key |
+| Jira creation fails for a story | Log the failure with reason, skip, continue, offer retry in end summary |
+| Session interrupted mid-creation | On resumption, show which stories were created (with keys) and which are pending |
+| User skips review gate | Proceed directly to Phase 4, output full creation summary at end |
+| Duplicate stories detected | List matching story keys and titles, ask whether to proceed before creating |
+| Wrong project inferred | Flag after first creation, ask whether to continue or abort batch |
