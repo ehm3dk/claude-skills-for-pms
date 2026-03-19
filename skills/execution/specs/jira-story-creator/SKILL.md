@@ -37,7 +37,70 @@ If the user says "just go" or "proceed with what you have", mark any inferences 
 
 ## Phase 2: Story Generation
 
-...
+Draft all stories using the field template below. For each story:
+
+- Write one story per distinct user action or behaviour
+- Do not combine multiple behaviours into a single story
+- Be specific — "As a dealer, I want to filter my inventory by make and model" not "As a user, I want to filter"
+- Mark any inference not provided by the user as `[Assumption: ...]`
+- Mark any section you cannot complete due to missing context as `[Needs input from engineering]`
+- Omit sections that genuinely do not apply — do not leave blank headings
+
+### Story Format
+
+Use this structure for every story:
+
+---
+
+**[PREFIX-NNN] Story title**
+
+**Story:** As a [specific persona], I want [specific action], so that [clear benefit].
+
+**Description**
+[2–3 sentences: what this story delivers, why it matters, what system/flow it belongs to]
+
+**Acceptance Criteria**
+- Given [precondition], When [action], Then [outcome].
+- Given [precondition], When [action], Then [outcome].
+
+**Test Cases**
+1. [Happy path: normal use, expected result]
+2. [Edge case: boundary or unusual input]
+3. [Failure case: what happens when something goes wrong]
+
+**Engineering Approach**
+[Suggested technical implementation. Mark as `[Assumption]` if speculative. Skip if no context is available.]
+
+**Functional Requirements**
+- [What the system must do — specific and testable]
+- [Another requirement]
+
+**Non-Functional Requirements**
+- [Performance, accessibility, security, or compatibility constraints — only where relevant]
+
+**Data Requirements**
+- [New fields, schema changes, API dependencies — omit if none]
+
+**Instrumentation**
+- [Google Analytics events, tracking calls — only for user-facing interactions. Format: `event_name` on `trigger`. Omit if not applicable.]
+
+**Engineering Instructions**
+1. [Step-by-step dev guidance — specific enough to act on]
+2. [Next step]
+
+**Rollout Considerations**
+- [Feature flags, phased rollout, story dependencies, migration concerns — omit if none]
+
+---
+
+### Story ID Convention
+
+Use a short prefix derived from the feature or epic name:
+- `DLRUSER` epic → prefix `DU`
+- `DLRINV` epic → prefix `DI`
+- Free-text feature → derive a 2–3 letter prefix from the feature name, confirm with user
+
+Number sequentially: `DU-001`, `DU-002`, etc.
 
 ## Phase 3: Review Gate
 
