@@ -20,7 +20,8 @@ skills/
     challenge-me/
   execution/
     communication/        — Meeting notes, agendas, stakeholder updates, release notes
-    specs/                — User stories, PRDs, technical specs, API docs
+    specs/                — User stories, PRDs, technical specs, API docs, Jira story creation
+      jira-story-creator/
     planning/             — Sprint planning, experiments, release readiness
   new/                    — Skills under development or evaluation
     get-shit-done/
