@@ -104,7 +104,36 @@ Number sequentially: `DU-001`, `DU-002`, etc.
 
 ## Phase 3: Review Gate
 
+Present a numbered summary list of all stories — title and one-line description only. Follow it with a consolidated list of all `[Assumption: ...]` tags made in Phases 1 and 2.
+
+Example format:
+
+```
+Stories to create (8 total):
+
+1. DU-001 — Filter inventory by make/model: Dealer can narrow their stock list using dropdowns
+2. DU-002 — Save filter preferences: System remembers the dealer's last-used filters
 ...
+
+Assumptions made:
+- [Assumption: Engineering will use the existing filter component from the search page]
+- [Assumption: GA event name follows the existing `dealer_action_` prefix convention]
+
+What would you like to do?
+  a) Approve all and create in Jira
+  b) Revise specific stories (tell me which ones and what to change)
+  c) Skip certain stories (tell me which ones)
+  d) Just create them (skip this review)
+```
+
+**If the user chooses to revise specific stories:**
+- Ask them to specify which stories and what to change
+- Regenerate only those stories (loop back through Phase 2 for just those stories)
+- Re-present the full updated summary list
+- Repeat until the user approves
+
+**If the user says "just create them" or equivalent:**
+- Proceed directly to Phase 4 without further confirmation
 
 ## Phase 4: Jira Creation
 
