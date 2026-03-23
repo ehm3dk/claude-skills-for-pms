@@ -18,15 +18,40 @@ skills/
     define-product/
     discovery/
     challenge-me/
+    log-decision/
   execution/
     communication/        — Meeting notes, agendas, stakeholder updates, release notes
+      meeting-notes/
+      one-pager-creator/
+      release-note/
     specs/                — User stories, PRDs, technical specs, API docs, Jira story creation
       jira-story-creator/
     planning/             — Sprint planning, experiments, release readiness
+      experiment-designer/
+      release-readiness/
+    update-customer/      — Stakeholder update communications
     update-inventory/     — Sync DLRINV Done items → Inventory changelog Confluence page
-  new/                    — Skills under development or evaluation
-    get-shit-done/
-    pm-skills/
+  superpowers/            — Advanced Claude Code workflow skills
+    brainstorming/
+    dispatching-parallel-agents/
+    executing-plans/
+    finishing-a-development-branch/
+    receiving-code-review/
+    requesting-code-review/
+    subagent-driven-development/
+    systematic-debugging/
+    test-driven-development/
+    using-git-worktrees/
+    using-superpowers/
+    verification-before-completion/
+    writing-plans/
+    writing-skills/
+  obsidian/               — Obsidian vault and note-taking skills
+    defuddle/
+    json-canvas/
+    obsidian-bases/
+    obsidian-cli/
+    obsidian-markdown/
 ```
 
 Each skill lives in its own directory and contains a `SKILL.md` file.
@@ -77,6 +102,6 @@ See `CONTRIBUTING.md` for full details.
 
 ## Working Notes
 
-- The `skills/new/` directory contains work-in-progress skills — treat these as drafts
-- `skills/new/pm-skills/` has a plugin validator at `validate_plugins.py` — run it before any PR
-- `skills/new/get-shit-done/` is a more complex skill with its own agents, hooks, and scripts
+- `skills/superpowers/` contains advanced workflow skills for Claude Code power users
+- `skills/obsidian/` contains Obsidian-specific note-taking and vault management skills
+- Run `python3 validate_plugins.py` before any PR to validate skill frontmatter
