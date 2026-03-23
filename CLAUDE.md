@@ -14,44 +14,21 @@ Repository: https://github.com/ehm3dk/claude-skills-for-pms
 
 ```
 skills/
-  strategic/              — High-level PM thinking (PRDs, discovery, stress-testing)
-    define-product/
-    discovery/
-    challenge-me/
-    log-decision/
-  execution/
-    communication/        — Meeting notes, agendas, stakeholder updates, release notes
-      meeting-notes/
-      one-pager-creator/
-      release-note/
-    specs/                — User stories, PRDs, technical specs, API docs, Jira story creation
-      jira-story-creator/
-    planning/             — Sprint planning, experiments, release readiness
-      experiment-designer/
-      release-readiness/
-    update-customer/      — Stakeholder update communications
-    update-inventory/     — Sync DLRINV Done items → Inventory changelog Confluence page
-  superpowers/            — Advanced Claude Code workflow skills
-    brainstorming/
-    dispatching-parallel-agents/
-    executing-plans/
-    finishing-a-development-branch/
-    receiving-code-review/
-    requesting-code-review/
-    subagent-driven-development/
-    systematic-debugging/
-    test-driven-development/
-    using-git-worktrees/
-    using-superpowers/
-    verification-before-completion/
-    writing-plans/
-    writing-skills/
-  obsidian/               — Obsidian vault and note-taking skills
-    defuddle/
-    json-canvas/
-    obsidian-bases/
-    obsidian-cli/
-    obsidian-markdown/
+  challenge-me/           — Stress-test ideas, surface blind spots, steelman counterarguments
+  define-product/         — Generate PRDs with user stories, acceptance criteria, and engineering instructions
+  discovery/              — Market research and competitive analysis
+  log-decision/           — Log architectural or product decisions to Confluence
+  communication/          — Stakeholder and team communications
+    meeting-notes/
+    one-pager-creator/
+    release-note/
+  planning/               — Sprint planning and release management
+    experiment-designer/
+    release-readiness/
+  specs/                  — Technical specs and Jira story creation
+    jira-story-creator/
+  update-customer/        — Sync DLRUSER Done items → Customer Team Change Log Confluence page
+  update-inventory/       — Sync DLRINV Done items → Inventory changelog Confluence page
 ```
 
 Each skill lives in its own directory and contains a `SKILL.md` file.
@@ -102,6 +79,6 @@ See `CONTRIBUTING.md` for full details.
 
 ## Working Notes
 
-- `skills/superpowers/` contains advanced workflow skills for Claude Code power users
-- `skills/obsidian/` contains Obsidian-specific note-taking and vault management skills
+- Skills are now organised at a flat category level directly under `skills/`
+- `superpowers/` skills are installed via the `superpowers@claude-plugins-official` plugin — they don't live in this repo
 - Run `python3 validate_plugins.py` before any PR to validate skill frontmatter
