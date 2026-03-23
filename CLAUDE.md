@@ -23,6 +23,7 @@ skills/
     specs/                — User stories, PRDs, technical specs, API docs, Jira story creation
       jira-story-creator/
     planning/             — Sprint planning, experiments, release readiness
+    update-inventory/     — Sync DLRINV Done items → Inventory changelog Confluence page
   new/                    — Skills under development or evaluation
     get-shit-done/
     pm-skills/

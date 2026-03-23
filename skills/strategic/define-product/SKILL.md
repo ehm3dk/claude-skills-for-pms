@@ -26,7 +26,7 @@ If the user references a Jira ticket (e.g. DLRUSER-1234), fetch it first using t
 
 ## Step 1: Gather Context
 
-Assess what has been provided. You need:
+Assess what has been provided. if not provided ask for user input, You need:
 
 **Must-have (ask if missing):**
 - Product/feature name
