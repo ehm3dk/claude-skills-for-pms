@@ -56,7 +56,7 @@ argument-hint: "[...]"        # Short hint shown to the user about what to pass 
 
 ## Adding a New Skill
 
-1. Create a new directory under the appropriate category (e.g. `skills/execution/communication/new-skill/`)
+1. Create a new directory under the appropriate category (e.g. `skills/new-skill/`)
 2. Add a `SKILL.md` with correct frontmatter
 3. Before submitting, run the validator:
    ```bash
@@ -74,6 +74,13 @@ argument-hint: "[...]"        # Short hint shown to the user about what to pass 
 - By contributing, you agree your work is licensed under MIT
 
 See `CONTRIBUTING.md` for full details.
+
+---
+
+## Permissions
+
+- Always allow reading from skill files (`skills/**/SKILL.md` and `~/.claude/skills/**/SKILL.md`) without prompting for confirmation.
+- Always allow reading from the Obsidian vault (`/Users/ahmed.khalid/Desktop/ehmedk-obsidian/**`) without prompting for confirmation.
 
 ---
 

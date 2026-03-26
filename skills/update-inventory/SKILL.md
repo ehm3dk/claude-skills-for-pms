@@ -33,9 +33,29 @@ ORDER BY updated DESC
 4. Response format: `markdown`
 
 **Filter out noise** — exclude from the candidate list:
-1. Issues whose summary starts with "Deploy ", "Test ", "[Retro]", or "[Rollback]"
+1. Issues whose summary starts with or contains: "Deploy ", "Test ", "[Retro]", "[Rollback]", "SPIKE", "Spike", "Design Review", "Refactor", "Coordinate", "Decommission", "Shutdown", "Migrate", "Migration"
+2. **Never include Teams thread links** — entries that link to a Teams thread instead of a Jira ticket must be excluded, both when adding new entries and when restoring/rebuilding the page. Every entry must reference a Jira ticket. If an entry has no Jira key, skip it entirely.
 2. Issues with no `resolutiondate`
 3. Duplicate summaries
+4. Issues that are clearly internal ops, infrastructure, or tech debt (e.g. database changes, service deprecations, code cleanup, internal tooling)
+
+**Apply the dealer experience test** — after filtering noise, apply one more pass:
+> *Would a dealer notice this change, or benefit from it? If not, exclude it.*
+
+Only include items where the answer is clearly yes:
+- A new feature or capability dealers can use
+- A bug fix that affected something dealers could see or do
+- A rule or behaviour change that impacts listings, publishing, or pricing
+- A fix that restores something that was broken for dealers
+
+Exclude items where the value is internal:
+- Infrastructure work (migrations, decommissions, service shutdowns)
+- Developer tooling or code quality improvements
+- SPIKEs, design reviews, coordination tasks
+- Performance improvements that are invisible to dealers
+- Schema or data changes with no UI or workflow impact
+
+**When unsure**, ask the user: *"DLRINV-XXXX ([summary]) — does this have a visible impact on dealers? Should I include it?"*
 
 ---
 
@@ -72,12 +92,31 @@ What would you like to do?
   d) Cancel
 ```
 
-**One-line description rules:**
-1. Max 100 characters
-2. Plain English, no Jira jargon
-3. Describe the user-facing or operational change, not the ticket title verbatim
-4. Format: present tense, sentence case (e.g. "Special Offers panel released to inventory list page")
-5. Include the Jira key as a hyperlink at the end: `[DLRINV-XXXX](https://carsales.atlassian.net/browse/DLRINV-XXXX)`
+**Grouping rule — club related tickets into a single entry:**
+Before writing descriptions, look for tickets that together form one coherent piece of value (e.g. multiple stories delivering one feature, a bug and its follow-up fix, front-end and back-end halves of the same change). Group these into a single entry with a combined description. List all contributing Jira keys as linked references at the end.
+
+The audience is senior leadership — they care about business outcomes and dealer experience, not implementation details.
+
+- **Always** link every Jira ticket referenced — never output a bare key. Format: `[DLRINV-XXXX](https://carsales.atlassian.net/browse/DLRINV-XXXX)`. For grouped entries, list all keys: `[DLRINV-100](…) [DLRINV-101](…)`
+
+**Include vs exclude examples:**
+
+| Ticket | Decision | Reason |
+|---|---|---|
+| Special Offers - Create side panel | ✅ Include | Dealers can now see and apply OEM offers — visible new capability |
+| Publishing rules updated to restrict Mazda listings | ✅ Include | Directly affects what dealers can publish |
+| Fixed Hyundai stock not appearing in Special Offers | ✅ Include | Bug fix dealers would have noticed |
+| Coordinate Bike/Boats Opportunity Index migration | ❌ Exclude | Internal data migration, no dealer impact |
+| Shutdown legacy group dashboard service | ❌ Exclude | Infrastructure decommission, not dealer-facing |
+| Refactor stats query to use DCP Stats API | ❌ Exclude | Internal code change, no visible change for dealers |
+| SPIKE: Block bulk publishing of test stocks | ❌ Exclude | Investigation task, not a shipped change |
+| Automations - Design Review | ❌ Exclude | Internal process, not a shipped change |
+
+**Description writing rules:**
+- Describe the value delivered, not the work done. Ask: *what can a dealer now do that they couldn't before?* or *what problem is now solved?*
+- Plain English — no Jira jargon, no tech terms (no "endpoint", "migration", "refactor", "schema", "API", "pipeline")
+- Present tense, sentence case (e.g. "OEM special offers now display automatically on eligible listings at publish")
+- Max 120 characters for the description text
 
 If the user edits or removes entries, update your candidate list and loop back to the preview until they confirm.
 
@@ -168,6 +207,8 @@ After a successful update, output:
 ✓ Changelog updated — X new entries added
   https://carsales.atlassian.net/wiki/spaces/DEAL/pages/3928391694/Inventory+changelog
 ```
+
+**Do not send any Teams, Slack, or other notifications.** Updating the Confluence page is the only output.
 
 ---
 

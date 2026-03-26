@@ -72,12 +72,24 @@ What would you like to do?
   d) Cancel
 ```
 
-**One-line description rules:**
-1. Max 100 characters
-2. Plain English, no Jira jargon
-3. Describe the user-facing or operational change, not the ticket title verbatim
-4. Format: present tense, sentence case (e.g. "Customer details page released to all dealers")
-5. Include the Jira key as a hyperlink at the end: `[DLRUSER-XXXX](https://carsales.atlassian.net/browse/DLRUSER-XXXX)`
+**Grouping rule — club related tickets into a single entry:**
+Before writing descriptions, look for tickets that together form one coherent piece of value (e.g. multiple stories delivering one feature, a bug and its follow-up fix, front-end and back-end halves of the same change). Group these into a single entry with a combined description. List all contributing Jira keys as linked references at the end.
+
+**Description rules — written for ELT, not engineers:**
+- The audience is senior leadership. They care about business outcomes and dealer experience, not implementation details.
+- Describe the value delivered, not the work done. Ask: *what can a dealer now do that they couldn't before?* or *what problem is now solved?*
+- Plain English — no Jira jargon, no tech terms (no "endpoint", "migration", "refactor", "schema", "API")
+- Present tense, sentence case (e.g. "Dealers can now see enriched call summaries on the customer profile")
+- Max 120 characters for the description text
+- **Always** link every Jira ticket referenced — never output a bare key. Format: `[DLRUSER-XXXX](https://carsales.atlassian.net/browse/DLRUSER-XXXX)`. For grouped entries, list all keys: `[DLRUSER-100](…) [DLRUSER-101](…)`
+
+**Good vs bad examples:**
+
+| Bad (output) | Good (value) |
+|---|---|
+| Migrated prospect records to customer schema | Dealer customer records are now unified — no more duplicate prospect entries |
+| Implemented call transcript extraction API | Call summaries are automatically saved to the customer profile after every call |
+| Fixed null pointer in enrichment service | Call enrichment now works reliably for all dealers, including group accounts |
 
 If the user edits or removes entries, update your candidate list and loop back to the preview until they confirm.
 
@@ -168,6 +180,8 @@ After a successful update, output:
 ✓ Changelog updated — X new entries added
   https://carsales.atlassian.net/wiki/spaces/DEAL/pages/3230072918/Customer+Team+-+Change+Log
 ```
+
+**Do not send any Teams, Slack, or other notifications.** Updating the Confluence page is the only output.
 
 ---
 

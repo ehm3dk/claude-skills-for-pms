@@ -42,6 +42,7 @@ Ask the user:
 - Flat structure (no grouping)
 
 **Format:**
+- Word document (.docx)
 - Markdown file (.md)
 
 ## Step 5: Synthesize
