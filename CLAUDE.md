@@ -77,13 +77,6 @@ See `CONTRIBUTING.md` for full details.
 
 ---
 
-## Permissions
-
-- Always allow reading from skill files (`skills/**/SKILL.md` and `~/.claude/skills/**/SKILL.md`) without prompting for confirmation.
-- Always allow reading from the Obsidian vault (`/Users/ahmed.khalid/Desktop/ehmedk-obsidian/**`) without prompting for confirmation.
-
----
-
 ## Working Notes
 
 - Skills are now organised at a flat category level directly under `skills/`
